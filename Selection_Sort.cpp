@@ -2,22 +2,22 @@
 using namespace std;
 
 int main() {
-    int A[8] = {77, 33, 44, 11, 88, 22, 66, 55};
-    int n = 8, LOC, MIN, temp;
+    int A[10] = {0,80,77, 33, 44, 11, 88, 22, 66, 55};
+    int n = 9, LOC, MIN, temp;
 
     cout << "Original Array: ";
-    for(int i = 0; i < n; i++) {
+    for(int i = 1; i <= n; i++) {
         cout << A[i] << " ";
     }
     cout << endl;
 
     // Selection Sort
-    for(int K = 0; K < n - 1; K++) {
+    for(int K = 1; K <= n - 1; K++) {
         MIN = A[K];  // Min = 77 
         LOC = K;     // Loc = 0
 
         // Find smallest element
-        for(int J = K + 1; J < n; J++) {
+        for(int J = K + 1; J <= n; J++) {
             if(MIN > A[J]) {
                 MIN = A[J];
                 LOC = J;
@@ -33,14 +33,14 @@ int main() {
 
         // Print each pass
         cout << "Pass " << K + 1 << ": ";
-        for(int i = 0; i < n; i++) {
+        for(int i = 1; i <= n; i++) {
             cout << A[i] << " ";
         }
         cout << endl;
     }
 
     cout << "Sorted Array: ";
-    for(int i = 0; i < n; i++) {
+    for(int i = 1; i <= n; i++) {
         cout << A[i] << " ";
     }
 

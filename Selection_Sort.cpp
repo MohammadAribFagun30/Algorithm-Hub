@@ -1,48 +1,44 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-    int A[10] = {0,80,77, 33, 44, 11, 88, 22, 66, 55};
-    int n = 9, LOC, MIN, temp;
+void selectionSort(vector<int> &ar, int n)
+{
+    for(int i=0; i<n-1; i++)
+    {
+        int smallIndx = i;
 
-    cout << "Original Array: ";
-    for(int i = 1; i <= n; i++) {
-        cout << A[i] << " ";
-    }
-    cout << endl;
-
-    // Selection Sort
-    for(int K = 1; K <= n - 1; K++) {
-        MIN = A[K];  // Min = 77 
-        LOC = K;     // Loc = 0
-
-        // Find smallest element
-        for(int J = K + 1; J <= n; J++) {
-            if(MIN > A[J]) {
-                MIN = A[J];
-                LOC = J;
+        for(int j = i+1; j<n; j++)
+        {
+            if( ar[j] < ar[smallIndx] )
+            {
+                smallIndx = j;
             }
         }
-        // Min = 11
-        // Loc = 3
-
-        // Swap elements
-        temp = A[K]; // temp = 77
-        A[K] = A[LOC]; // A[k] = 11
-        A[LOC] = temp; // A[Loc] = 77
-
-        // Print each pass
-        cout << "Pass " << K + 1 << ": ";
-        for(int i = 1; i <= n; i++) {
-            cout << A[i] << " ";
-        }
-        cout << endl;
+         swap( ar[i] , ar[smallIndx]);
     }
 
-    cout << "Sorted Array: ";
-    for(int i = 1; i <= n; i++) {
-        cout << A[i] << " ";
+    
+
+    for(auto  val : ar)
+    {
+        cout<<val<<" ";
     }
+}
+
+int main() {
+
+     int n;
+    cin>>n;
+
+    vector<int>ar(n);
+
+    for(int i=0; i<n; i++)
+    {
+        cin>>ar[i];
+    }
+
+    selectionSort(ar,n-1);
+
 
     return 0;
 }

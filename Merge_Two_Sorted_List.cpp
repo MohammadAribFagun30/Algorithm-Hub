@@ -1,56 +1,78 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-void combineArrays(int firstArr[], int size1, int secondArr[], int size2, int finalArr[]) {
-    int p = 0, q = 0, r = 0;
+void merge(vector<int> &ar, int st, int mid, int end)
+{
+    vector<int> temp;
 
-    while (p < size1 && q < size2) {
-        if (firstArr[p] < secondArr[q]) {
-            finalArr[r] = firstArr[p];
-            p++;
-        } else {
-            finalArr[r] = secondArr[q];
-            q++;
+    int i = st , j = mid+1;
+
+    while(i<=mid && j<=end)
+    {
+        if(ar[i] <= ar[j])
+        {
+            temp.push_back(ar[i]);
+            i++;
         }
-        r++;
+
+        else{
+            temp.push_back(ar[j]);
+            j++;
+        }
     }
 
-    while (p < size1) {
-        finalArr[r] = firstArr[p];
-        p++;
-        r++;
+
+    while(i<=mid)
+    {
+        temp.push_back(ar[i]);
+            i++;
     }
 
-    while (q < size2) {
-        finalArr[r] = secondArr[q];
-        q++;
-        r++;
+     while(j<=end)
+    {
+         temp.push_back(ar[j]);
+            j++;
+    }
+
+    for(int i = 0; i<temp.size(); i++)
+    {
+        ar[i+st] = temp[i];
+    }
+}
+
+void mergeSort(vector<int> &ar, int st, int end)
+{
+    if(st<end)
+    {
+        int mid  = st + (end-st)/2;
+
+        // left half
+        mergeSort(ar, st, mid);
+
+        // right half
+        mergeSort(ar, mid+1, end);
+
+        merge(ar, st, mid, end);
     }
 }
 
 int main() {
-    int lengthA, lengthB;
+    int n;
+    cin>>n;
 
-    cin >> lengthA >> lengthB;
+    vector<int>ar(n);
 
-    int firstArray[lengthA], secondArray[lengthB], mergedArray[lengthA + lengthB];
-
-    for (int index = 0; index < lengthA; index++) {
-        cin >> firstArray[index];
+    for(int i=0; i<n; i++)
+    {
+        cin>>ar[i];
     }
 
-    for (int index = 0; index < lengthB; index++) {
-        cin >> secondArray[index];
+    mergeSort(ar,0,n-1);
+
+    for(auto  val : ar)
+    {
+        cout<<val<<" ";
     }
-
-    combineArrays(firstArray, lengthA, secondArray, lengthB, mergedArray);
-
-    for (int index = 0; index < lengthA + lengthB; index++) {
-        cout << mergedArray[index] << " ";
-    }
-
-    cout << endl;
 
     return 0;
 }

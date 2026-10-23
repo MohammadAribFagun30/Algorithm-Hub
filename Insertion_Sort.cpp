@@ -1,77 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class InsertionSort
+void insertionSort(vector<int> &ar, int n)
 {
-private:
-    int A[100], N;
 
-public:
-    // Input array
-    void input()
+    for (int i = 1; i < n; i++)
     {
-        cout << "Enter number of elements: ";
-        cin >> N;
+        int currnt = ar[i];
+        int pre = i - 1;
 
-        cout << "Enter elements:\n";
-        for (int i = 1; i <= N; i++)
+        while (pre >= 0 && ar[pre] > currnt)
         {
-            cin >> A[i];
+            ar[pre + 1] = ar[pre];
+            pre--;
         }
-
-        // Sentinel value
-        A[0] = -9999;
+        ar[pre + 1] = currnt;
     }
 
-    // Insertion Sort
-    void sort()
+    for (auto val : ar)
     {
-        int TEMP, PTR;
-
-        cout << "\nPasses of Insertion Sort:\n";
-
-        for (int K = 2; K <= N; K++)
-        {
-            TEMP = A[K];
-            PTR = K - 1;
-
-            while (TEMP < A[PTR])
-            {
-                A[PTR + 1] = A[PTR];
-                PTR = PTR - 1;
-            }
-
-            A[PTR + 1] = TEMP;
-
-            // Display array after each pass
-            cout << "Pass " << K - 1 << ": ";
-            for (int i = 1; i <= N; i++)
-            {
-                cout << A[i] << " ";
-            }
-            cout << endl;
-        }
+        cout << val << " ";
     }
-
-    // Display sorted array
-    void display()
-    {
-        cout << "\nSorted Array:\n";
-        for (int i = 1; i <= N; i++)
-        {
-            cout << A[i] << " ";
-        }
-        cout << endl;
-    }
-};
+}
 
 int main()
 {
-    InsertionSort obj;
 
-    obj.input();
-    obj.sort();
-    obj.display();
+    int n;
+    cin >> n;
+
+    vector<int> ar(n);
+
+    for (int i = 0; i < n; i++)
+    {
+        cin >> ar[i];
+    }
+
+    insertionSort(ar, n - 1);
 
     return 0;
 }

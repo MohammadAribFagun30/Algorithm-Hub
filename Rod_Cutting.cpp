@@ -1,3 +1,44 @@
+// Recurrence 
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int n;
+vector<int> price, memo;
+
+// maximum price obtainable from a rod of length len
+int rod(int len) {
+    if (len == 0) return 0;
+
+    if (memo[len] != -1)
+        return memo[len];
+
+    int best = 0;
+
+    for (int i = 1; i <= len; i++)
+        best = max(best, price[i - 1] + rod(len - i));
+
+    return memo[len] = best;
+}
+
+int main() {
+    price = {1, 5, 8, 9, 10, 17, 17, 20};
+
+    n = price.size();
+    memo.assign(n + 1, -1);
+
+    cout << rod(n) << "\n";  // 22
+}
+
+
+
+
+
+
+
+
+
+// Bottom Up --> Tabulation
 #include <bits/stdc++.h>
 using namespace std;
 
